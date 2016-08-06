@@ -1,12 +1,8 @@
 package com.techosoft.idea.playsome;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     // UI references.
     Button btnWant;
+    Button btnWantList;
 
 
     @Override
@@ -35,11 +32,21 @@ public class MainActivity extends AppCompatActivity {
         btnWant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //myHelper.displayToast(myHelper.getSettingsStr("testKey"));
                 goToActivity(FormWant.class);
             }
         });
+        btnWantList = (Button)findViewById(R.id.btnWantList);
+        btnWantList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToActivity(WantList.class);
+            }
+        });
 
+
+
+
+        //TO Delete **********
         myHelper.setLogin(false);
 
         //goToActivity(LoginActivity.class);

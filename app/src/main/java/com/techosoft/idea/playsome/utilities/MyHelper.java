@@ -26,6 +26,10 @@ public class MyHelper extends ContextWrapper {
     public void displayToast(String text){
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         toast.show();
+        /* some good way to display, research later
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+         */
     }
 
     public void setLogin(boolean loginFlag){
