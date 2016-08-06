@@ -8,6 +8,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
+import com.techosoft.idea.playsome.models.WantItem;
 
 import java.util.Date;
 
@@ -28,11 +29,34 @@ public class CloudAgent extends ContextWrapper {
 
     }
 
-    public void saveWantItem(final String title, String detail, Date date){
+    public void saveWantItem(final String title, String detail, Date date, int userId){
         final AVObject wantItem = new AVObject(mConst.TABLE_WANT_ITEM);
         wantItem.put(mConst.WANT_ITEM_TITLE, title);
         wantItem.put(mConst.WANT_ITEM_DETAIL, detail);
         wantItem.put(mConst.WANT_ITEM_DATE, date);
+        wantItem.put(mConst.WANT_ITEM_USERID, userId);
+        wantItem.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) {
+                    // 存储成功
+                    Log.d(mConst.LOG_TAG, "want item saved with objId: " + wantItem.getObjectId());
+                    // 保存成功之后，objectId 会自动从服务端加载到本地
+                } else {
+                    Log.d(mConst.LOG_TAG, "failed save want_item, title: " + title);
+                    // 失败的话，请检查网络环境以及 SDK 配置是否正确
+                }
+            }
+        });
+    }
+
+    public void saveWantItem(WantItem myWantItem){
+        final AVObject wantItem = new AVObject(mConst.TABLE_WANT_ITEM);
+        wantItem.put(mConst.WANT_ITEM_TITLE, myWantItem.title);
+        wantItem.put(mConst.WANT_ITEM_DETAIL, myWantItem.detail);
+        wantItem.put(mConst.WANT_ITEM_DATE, myWantItem.expireDate);
+        wantItem.put(mConst.WANT_ITEM_USERID, myWantItem.ownerId);
+        final String title = myWantItem.title; //this is used for error message, but may never used
         wantItem.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {

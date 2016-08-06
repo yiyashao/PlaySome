@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.techosoft.idea.playsome.models.WantItem;
 import com.techosoft.idea.playsome.utilities.CloudAgent;
 import com.techosoft.idea.playsome.utilities.DatePickerFragment;
 import com.techosoft.idea.playsome.utilities.MyHelper;
@@ -52,15 +53,14 @@ public class FormWant extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d(myHelper.mConst.LOG_TAG, "user has submited data");
+                Log.d(myHelper.mConst.LOG_TAG, "user has submitted data");
                 if(isValidData()){
                     sendWantInfoToServer();
-                    myHelper.displayToast("going to close this FORM");
+                    Log.d(myHelper.mConst.LOG_TAG, "user data saved on CLOUD and closing want form");
+                    killActivity();
                 }else{
                     askForReEntry();
                 }
-
             }
         });
 
@@ -77,7 +77,7 @@ public class FormWant extends AppCompatActivity {
      * @return data check result
      */
     private boolean isValidData() {
-        return false; //TODO
+        return true; //TODO
     }
 
     /**
@@ -96,9 +96,17 @@ public class FormWant extends AppCompatActivity {
     }
 
     public void sendWantInfoToServer(){
-        myHelper.displayToast("ok, sending the info to server");
         CloudAgent cloudConn = new CloudAgent(this);
-        cloudConn.saveWantItem(textTitle.getText().toString(), textDetail.getText().toString(), this.expireDate);
+        WantItem wantItem = new WantItem();
+        wantItem.detail = textDetail.getText().toString();
+        wantItem.title = textTitle.getText().toString();
+        wantItem.expireDate = this.expireDate;
+        wantItem.ownerId = myHelper.getSettingsInt(myHelper.mConst.KEY_USER_ID);
+        cloudConn.saveWantItem(wantItem);
+    }
+
+    void killActivity(){
+        finish();
     }
     //================================= HELPER FUNC END ====================================
 }

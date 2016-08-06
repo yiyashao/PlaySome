@@ -4,9 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PlaySome.iml" filepath="$PROJECT_DIR$/PlaySome.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/httpmime-4.2.4/httpmime-4.2.4.iml" filepath="$PROJECT_DIR$/httpmime-4.2.4/httpmime-4.2.4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/okhttp-2.6.0-leancloud/okhttp-2.6.0-leancloud.iml" filepath="$PROJECT_DIR$/okhttp-2.6.0-leancloud/okhttp-2.6.0-leancloud.iml" />
-      <module fileurl="file://$PROJECT_DIR$/okio-1.6.0-leancloud/okio-1.6.0-leancloud.iml" filepath="$PROJECT_DIR$/okio-1.6.0-leancloud/okio-1.6.0-leancloud.iml" />
     </modules>
   </component>
 </project>

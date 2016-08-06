@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         myHelper = new MyHelper(this);
         myHelper.setSettingsStr("testKey", "this is test value");
+        myHelper.setSettingsInt(myHelper.mConst.KEY_USER_ID, 1); //hardcoded
 
         //setup UI
         btnWant = (Button)findViewById(R.id.btnWant);

@@ -33,17 +33,31 @@ public class MyHelper extends ContextWrapper {
         editor.commit();
     }
 
-    //universal method to set a string value to shared preference
+    /**
+     * universal method to set a string value to shared preference
+     * @param key
+     * @param value
+     */
     public void setSettingsStr(String key, String value){
         editor.putString(key, value);
+        editor.commit();
+    }
+
+    public void setSettingsInt(String key, int value) {
+        editor.putInt(key, value);
         editor.commit();
     }
 
     public String getSettingsStr(String key){
         return settings.getString(key, "");
     }
+    public int getSettingsInt(String key){
+        return settings.getInt(key, 0);
+    }
 
     public boolean isLogin(){
         return settings.getBoolean(mConst.KEY_LOGIN, false);
     }
+
+
 }

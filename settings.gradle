@@ -1,1 +1,1 @@
-include ':app', ':httpmime-4.2.4', ':okhttp-2.6.0-leancloud', ':okio-1.6.0-leancloud'
+include ':app'
