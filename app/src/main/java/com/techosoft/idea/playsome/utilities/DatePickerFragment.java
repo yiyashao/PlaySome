@@ -45,7 +45,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         this.monthOfYear = monthOfYear;
         this.dayOfMonth = dayOfMonth;
         FormWant callingActivity = (FormWant) getActivity(); //TODO, how to identify the caller activity and call it back, better use a callback than this.
-        callingActivity.onUserSelectValue(formDate(year, monthOfYear, dayOfMonth));
+        callingActivity.onUserSelectDate(formDate(year, monthOfYear, dayOfMonth));
         //dialog.dismiss();
 
 
