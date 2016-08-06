@@ -7,7 +7,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.techosoft.idea.playsome.utilities.ItemDetail">
+    tools:context=".ItemDetail">
 
     <TextView
         android:layout_width="wrap_content"

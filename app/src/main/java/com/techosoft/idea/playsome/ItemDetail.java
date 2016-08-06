@@ -1,4 +1,4 @@
-package com.techosoft.idea.playsome.utilities;
+package com.techosoft.idea.playsome;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.techosoft.idea.playsome.R;
+import com.techosoft.idea.playsome.utilities.MyHelper;
 
 public class ItemDetail extends AppCompatActivity {
 
     TextView tvTitle, tvDetail, tvExpDate;
     Button btnGive, btnBack;
     MyHelper myHelper;
+
+    final static String ACTIVITY_NAME = "activity/ItemDetail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class ItemDetail extends AppCompatActivity {
         String title = this.getIntent().getExtras().getString("title");
         String detail = this.getIntent().getExtras().getString("detail");
         String expDate = this.getIntent().getExtras().getString("expDate");
-        Log.d(myHelper.mConst.LOG_TAG, "intent extracted: " + title + detail + expDate);
+        Log.d(myHelper.mConst.LOG_TAG, ACTIVITY_NAME + " intent extracted: " + title + detail + expDate);
 
         tvTitle.setText(title);
         tvDetail.setText(detail);

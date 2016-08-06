@@ -30,7 +30,7 @@
             android:name=".WantList"
             android:label="@string/title_activity_want_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".utilities.ItemDetail"></activity>
+        <activity android:name=".ItemDetail"></activity>
     </application>
 
 </manifest>

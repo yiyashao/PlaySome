@@ -7,10 +7,15 @@ import android.util.Log;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
+import com.techosoft.idea.playsome.WantList;
 import com.techosoft.idea.playsome.models.WantItem;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by davidsss on 16-08-06.
@@ -19,14 +24,14 @@ import java.util.Date;
 public class CloudAgent extends ContextWrapper {
 
     private Constants mConst;
+    private MyHelper myHelper;
 
     public CloudAgent(Context base){ //use contextWrapper to handle the pass of context
         super(base);
         //initialize objects
         mConst = new Constants();
         AVOSCloud.initialize(this, mConst.CLOUD_KEY_01, mConst.CLOUD_KEY_02); //initilize the cloud service
-
-
+        myHelper = new MyHelper(base);
     }
 
     public void saveWantItem(final String title, String detail, Date date, int userId){

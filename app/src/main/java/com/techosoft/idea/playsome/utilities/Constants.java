@@ -20,6 +20,7 @@ public class Constants {
     public final static String WANT_ITEM_DETAIL = "detail";
     public final static String WANT_ITEM_DATE = "expire_date";
     public final static String WANT_ITEM_USERID = "user_id";
+    public static final int USER_ID_DEFAULT = 0;
 
     Constants(){} //initializer, not used
 }
