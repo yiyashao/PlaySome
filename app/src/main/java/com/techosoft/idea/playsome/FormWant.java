@@ -88,6 +88,7 @@ public class FormWant extends AppCompatActivity {
         String dateTimeString = DateFormat.getDateInstance().format(date);
         buttonDate.setText(dateTimeString);
         Log.d(myHelper.mConst.LOG_TAG, "got date from the picker: " + date.toString());
+        this.expireDate = date;
     }
 
     public void showDatePickerDialog(View v) {

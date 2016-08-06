@@ -73,6 +73,8 @@ public class WantList extends AppCompatActivity {
                         AVObject oneItem = resultList.get(i);
                         WantItem oneWantItem = new WantItem();
                         oneWantItem.title = oneItem.getString(myHelper.mConst.WANT_ITEM_TITLE);
+                        oneWantItem.detail = oneItem.getString(myHelper.mConst.WANT_ITEM_DETAIL);
+                        oneWantItem.expireDate = oneItem.getDate(myHelper.mConst.WANT_ITEM_DATE);
                         itemList.add(oneWantItem);
                     }
                     Log.d(myHelper.mConst.LOG_TAG, "record found: " + resultList.size());
