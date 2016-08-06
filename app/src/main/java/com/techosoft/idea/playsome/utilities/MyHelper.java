@@ -12,7 +12,7 @@ public class MyHelper extends ContextWrapper {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
-    Constants mConst;
+    public Constants mConst;
     Context context;
 
     public MyHelper(Context base){

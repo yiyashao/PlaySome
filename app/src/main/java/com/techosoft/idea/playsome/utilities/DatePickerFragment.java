@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import com.techosoft.idea.playsome.FormWant;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by davidsss on 16-08-06.
@@ -43,10 +44,28 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         this.year = year;
         this.monthOfYear = monthOfYear;
         this.dayOfMonth = dayOfMonth;
-        FormWant callingActivity = (FormWant) getActivity();
-        callingActivity.onUserSelectValue();
+        FormWant callingActivity = (FormWant) getActivity(); //TODO, how to identify the caller activity and call it back, better use a callback than this.
+        callingActivity.onUserSelectValue(formDate(year, monthOfYear, dayOfMonth));
         //dialog.dismiss();
+
+
     }
+
+    private Date formDate(int year, int monthOfYear, int dayOfMonth){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, monthOfYear);
+        cal.set(Calendar.DATE, dayOfMonth);
+        /*cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);*/
+        Date date = cal.getTime();
+        return date;
+    }
+
+
+
 
 
 }
