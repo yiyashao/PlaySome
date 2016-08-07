@@ -13,5 +13,6 @@ public class WantItem {
     public String detail = "";
     public int ownerId = 0;
     public Date expireDate = new Date();
+    public String itemCloudId = "";
 
 }

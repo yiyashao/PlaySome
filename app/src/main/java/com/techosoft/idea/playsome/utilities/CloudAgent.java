@@ -34,26 +34,33 @@ public class CloudAgent extends ContextWrapper {
         myHelper = new MyHelper(base);
     }
 
-    public void saveWantItem(final String title, String detail, Date date, int userId){
-        final AVObject wantItem = new AVObject(mConst.TABLE_WANT_ITEM);
-        wantItem.put(mConst.WANT_ITEM_TITLE, title);
-        wantItem.put(mConst.WANT_ITEM_DETAIL, detail);
-        wantItem.put(mConst.WANT_ITEM_DATE, date);
-        wantItem.put(mConst.WANT_ITEM_USERID, userId);
-        wantItem.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if (e == null) {
-                    // 存储成功
-                    Log.d(mConst.LOG_TAG, "want item saved with objId: " + wantItem.getObjectId());
-                    // 保存成功之后，objectId 会自动从服务端加载到本地
-                } else {
-                    Log.d(mConst.LOG_TAG, "failed save want_item, title: " + title);
-                    // 失败的话，请检查网络环境以及 SDK 配置是否正确
+
+
+    public void saveWantItemInGiveList(String itemCloudId, int userId){
+        final AVObject giveListLink = new AVObject(mConst.TABLE_GIVE_BOX);
+        giveListLink.put(mConst.GIVE_BOX_GIVER_ID, userId); //int value
+        giveListLink.put(mConst.GIVE_BOX_WANT_ITEM_OBJID, itemCloudId); //String value
+        try{
+            giveListLink.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        // 存储成功
+                        myHelper.displayToast("item saved into Give Box");
+                        // 保存成功之后，objectId 会自动从服务端加载到本地
+                    } else {
+                        Log.d(mConst.LOG_TAG, "failed save item to Give Box");
+                        // 失败的话，请检查网络环境以及 SDK 配置是否正确
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            Log.d(mConst.LOG_TAG, "failed save item to Give Box with Exception " + e.toString() );
+        }
+
     }
+
+
 
     public void saveWantItem(WantItem myWantItem){
         final AVObject wantItem = new AVObject(mConst.TABLE_WANT_ITEM);

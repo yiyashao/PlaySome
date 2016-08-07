@@ -79,19 +79,20 @@ public class WantList extends AppCompatActivity {
                 //loop through the result if returned value
                 if(resultList.size() > 0){
                     for(int i = 0; i < resultList.size(); i ++){
-                        AVObject oneItem = resultList.get(i);
-                        WantItem oneWantItem = new WantItem();
-                        oneWantItem.title = oneItem.getString(myHelper.mConst.WANT_ITEM_TITLE);
-                        oneWantItem.detail = oneItem.getString(myHelper.mConst.WANT_ITEM_DETAIL);
-                        oneWantItem.expireDate = oneItem.getDate(myHelper.mConst.WANT_ITEM_DATE);
-                        itemList.add(oneWantItem);
+                        AVObject cloudItem = resultList.get(i);
+                        WantItem tempWantItem = new WantItem();
+                        tempWantItem.title = cloudItem.getString(myHelper.mConst.WANT_ITEM_TITLE);
+                        tempWantItem.detail = cloudItem.getString(myHelper.mConst.WANT_ITEM_DETAIL);
+                        tempWantItem.expireDate = cloudItem.getDate(myHelper.mConst.WANT_ITEM_DATE);
+                        tempWantItem.itemCloudId = cloudItem.getObjectId();
+                        itemList.add(tempWantItem);
                     }
                     Log.d(myHelper.mConst.LOG_TAG, "record found: " + resultList.size());
                 }else{
                     Log.d(myHelper.mConst.LOG_TAG, "no record found for userId: " + 1); //current user have no record
                 }
 
-                mySleep(500);
+                //mySleep(500); used to make sure the loading diagram shows
                 whenResultReturned(itemList);
 
                 progress.hide();
@@ -103,9 +104,11 @@ public class WantList extends AppCompatActivity {
     // attach the item detail then go to the activity
     private void goToDetailActivity(WantItem selectedItem){
         Intent detailIntent = new Intent(this, ItemDetail.class);
+        detailIntent.putExtra(myHelper.mConst.WANT_ITEM_OBJID, selectedItem.itemCloudId);
         detailIntent.putExtra("title", selectedItem.title);
         detailIntent.putExtra("detail", selectedItem.detail);
         detailIntent.putExtra("expDate", selectedItem.expireDate.toString());
+        //myHelper.displayToast(selectedItem.itemCloudId);
         startActivity(detailIntent);
     }
     // go to the WANT FORM activity
