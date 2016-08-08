@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnWant;
     Button btnWantList;
     Button btnTest;
+    Button btnGiveList;
 
 
     @Override
@@ -45,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 goToActivity(WantList.class);
             }
         });
+        btnGiveList = (Button)findViewById(R.id.btnMainGiveList) ;
+        btnGiveList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToActivity(GiveList.class);
+            }
+        });
 
         //test button
 
@@ -61,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         //TO Delete **********
-        myHelper.setLogin(false);
-
-        //goToActivity(LoginActivity.class);
     }
 
 
