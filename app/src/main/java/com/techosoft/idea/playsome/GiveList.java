@@ -24,7 +24,7 @@ public class GiveList extends AppCompatActivity {
         setContentView(R.layout.activity_give_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         mRecycleView = (RecyclerView) findViewById(R.id.recycler_view);
         setUpRecyclerView();
 
