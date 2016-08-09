@@ -279,6 +279,9 @@ public class GiveList extends AppCompatActivity {
         public void pendingRemoval(int swipedPosition){}
 
         public boolean isPendingRemoval(int position) {
+
+
+            return false; //to change
         }
     }
 
