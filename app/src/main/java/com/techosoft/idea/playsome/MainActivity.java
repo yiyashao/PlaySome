@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         //test button
 
         btnTest = (Button) findViewById(R.id.btnTest);
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         //TO Delete **********
