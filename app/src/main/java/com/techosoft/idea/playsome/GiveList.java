@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
+import java.util.List;
 
 
 /**
@@ -251,9 +252,12 @@ public class GiveList extends AppCompatActivity {
 
         private static final int PENDING_REMOVAL_TIMEOUT = 3000; // 3sec
 
-
+        List<String > items;
+        List<String> itemsPendingRemoval;
+        int lastInsertedIndex; //so we can add some more items
         boolean undoOn; // is undo on, you can turn it on from the toolbar menu
 
+        private Handler handler = new Handler();
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return null;
