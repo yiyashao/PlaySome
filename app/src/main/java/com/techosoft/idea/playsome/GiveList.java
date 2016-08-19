@@ -22,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -258,23 +260,79 @@ public class GiveList extends AppCompatActivity {
         boolean undoOn; // is undo on, you can turn it on from the toolbar menu
 
         private Handler handler = new Handler();
+        HashMap<String, Runnable> pendingRunnables = new HashMap<>(); //map of items to pending runnables, so we can cancel a removal if needed
+
+        public GiveListAdapter(){
+            items = new ArrayList<>();
+            itemsPendingRemoval = new ArrayList<>();
+            //lets generate some items
+            lastInsertedIndex = 15;
+            // print 15 items
+            for(int i = 1; i < lastInsertedIndex; i ++){
+                items.add("item" + i);
+            }
+        }
+
+
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
+            return new GiveViewHolder(parent);
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            GiveViewHolder viewHolder = (GiveViewHolder) holder;
+            final String item = items.get(position);
+
+            if(itemsPendingRemoval.contains(item)) {
+                //show the "undo" state of the row
+                viewHolder.itemView.setBackgroundColor(Color.RED);
+                viewHolder.titleTextView.setVisibility(View.GONE);
+                viewHolder.undoButton.setVisibility(View.VISIBLE);
+                viewHolder.undoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // when undo removal, cancel the pending task
+                        Runnable pendingRemovalRunnable = pendingRunnables.get(item);
+                        pendingRunnables.remove(item);
+                        if (pendingRemovalRunnable != null) {
+                            //this will rebind the row in "normal" state
+                            notifyItemChanged(items.indexOf(item));
+                        }
+                    }
+                });
+            }else {
+                //we need to show the normal state
+                viewHolder.itemView.setBackgroundColor(Color.WHITE);
+                viewHolder.titleTextView.setVisibility(View.VISIBLE);
+                viewHolder.titleTextView.setText(item);
+                viewHolder.undoButton.setVisibility(View.GONE);
+                viewHolder.undoButton.setOnClickListener(null);
+            }
 
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return items.size();
+        }
+
+        /**
+         * utility method to add some rows for testing purpose, seems i dont need this.
+         * @param howMany
+         */
+        public void addItems(int howMany) {
+            if(howMany > 0) {
+                for (int i = lastInsertedIndex + 1; i < lastInsertedIndex + howMany; i++) {
+                    items.add("Item" + i);
+                    notifyItemInserted(items.size() - 1);
+                }
+                lastInsertedIndex = lastInsertedIndex + howMany;
+            }
         }
 
         public boolean isUndoOn() {
-            return undoOn;
+            return this.undoOn;
         }
 
         public void remove(int swipedPosition) {
@@ -287,6 +345,19 @@ public class GiveList extends AppCompatActivity {
 
             return false; //to change
         }
+    }
+
+    static class GiveViewHolder extends RecyclerView.ViewHolder {
+
+        TextView titleTextView;
+        Button undoButton;
+
+        public GiveViewHolder(ViewGroup parent) {
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_give_link, parent, false));
+            titleTextView = (TextView) itemView.findViewById(R.id.info_text);
+            undoButton = (Button) itemView.findViewById(R.id.undo_button);
+        }
+    }
     }
 
 }

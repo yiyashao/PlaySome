@@ -8,6 +8,29 @@
             android:id="@+id/info_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="This" />
+
+        <Button
+            android:id="@+id/undo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="undo"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:layout_gravity="end|center_vertical"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
+
+        <!-- quick and dirty divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="bottom"
+            />
 
 </LinearLayout>
