@@ -358,6 +358,5 @@ public class GiveList extends AppCompatActivity {
             undoButton = (Button) itemView.findViewById(R.id.undo_button);
         }
     }
-    }
 
 }
